@@ -8,9 +8,16 @@ import {increaseCounter} from '../actions/counterAction';
 import {decreaseCounter} from '../actions/counterAction';
 import {setCounter} from '../actions/counterAction';
 
+import  _  from 'lodash';
+import {configFunction} from '../../configFunction.js'
+
+import * as api1 from '../../api1-response.json';
+import * as api2 from '../../api2-response.json';
+import * as api3 from '../../api3-response.json';
+import * as config from '../../integration-config.json';
 
 
-
+const list = configFunction()
 const { width, height } = Dimensions.get("window");
 
 
@@ -25,6 +32,10 @@ export const assets = [
 
 class Swiper extends Component {
 
+    componentDidMount() {
+    //  var val = configFunction()
+    }
+
 
     nextCard = () => {
       if(this.props.counter===assets.length-1){
@@ -32,6 +43,9 @@ class Swiper extends Component {
       }else{
         this.props.dispatch(increaseCounter())
         console.log(this.props.counter)
+      //  this.path(config.default)
+      //  var val = configFunction()
+      //  console.log(val)
       }
     }
     previousCard = () => {
@@ -49,11 +63,12 @@ class Swiper extends Component {
     const {counter} =this.props
      return (
        <View style={{width:width,height:height}}>
-         {assets.slice(counter, counter + 4).reverse().map((card,index) => {
+         {list.slice(counter, counter + 2).map((card,index) => {
+           console.log(card.imageUrl)
            return (
              <Card
-               key={card}
-               card={card}
+               key={card.imageUrl}
+               card={card.imageUrl}
                index={counter}
                index2={index}
                onSwipeRight={this.nextCard.bind()}
