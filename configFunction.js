@@ -5,17 +5,17 @@ import * as config from './integration-config.json';
 import  _  from 'lodash';
 
 export function configFunction() {
+  let adres = config.default.api
+  let api = require(`./api3-response.json`)
+  console.log(api,'te',adres)
+    let apiArray= _.get(api, config.default.path);
 
-   let aa= _.get(eval(config.default.name), config.default.path);
-
-   let arrayManipulate = aa.map(item => {
-     let keys=config.default.key
+     let arrayManipulate = apiArray.map(item => {
+     let apiKey=config.default.key
        return {
-         imageUrl: item[keys],
+         imageUrl: item[apiKey],
        };
      });
-
-   console.log(arrayManipulate);
      return arrayManipulate
 };
 

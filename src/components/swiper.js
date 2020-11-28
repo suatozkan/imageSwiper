@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } from 'react-native';
 import {connect} from 'react-redux';
@@ -21,31 +20,14 @@ const list = configFunction()
 const { width, height } = Dimensions.get("window");
 
 
-export const assets = [
-  'https://via.placeholder.com/800x600/BD463C',
-  'https://via.placeholder.com/800x600/7A2E27',
-  'https://via.placeholder.com/800x600/FA5E50',
-  'https://via.placeholder.com/800x600/3B1613',
-  'https://via.placeholder.com/800x600/E05548',
-];
-
-
 class Swiper extends Component {
 
-    componentDidMount() {
-    //  var val = configFunction()
-    }
-
-
     nextCard = () => {
-      if(this.props.counter===assets.length-1){
+      if(this.props.counter===list.length-1){
         this.props.dispatch(setCounter())
       }else{
         this.props.dispatch(increaseCounter())
         console.log(this.props.counter)
-      //  this.path(config.default)
-      //  var val = configFunction()
-      //  console.log(val)
       }
     }
     previousCard = () => {
@@ -61,23 +43,39 @@ class Swiper extends Component {
   render() {
 
     const {counter} =this.props
-     return (
-       <View style={{width:width,height:height}}>
-         {list.slice(counter, counter + 2).map((card,index) => {
-           console.log(card.imageUrl)
-           return (
-             <Card
-               key={card.imageUrl}
-               card={card.imageUrl}
-               index={counter}
-               index2={index}
-               onSwipeRight={this.nextCard.bind()}
-               onSwipeLeft={this.previousCard.bind()}
-             />
-           )
-         })}
-       </View>
-     )
+
+    if(list.length>0) {
+
+        return (
+         <View style={{width:width,height:height}}>
+           {list.slice(counter, counter + 10).map((card,index) => {
+             console.log(list.length)
+             return (
+               <Card
+                 key={card.imageUrl}
+                 card={card.imageUrl}
+                 index={counter}
+                 index2={index}
+                 onSwipeRight={this.nextCard.bind()}
+                 onSwipeLeft={this.previousCard.bind()}
+               />
+             )
+           })}
+         </View>
+       )
+     }else{
+       return (
+         <View style={{width:width,height:height}}>
+         <View>
+           <Text>{list}</Text>
+         </View>
+         </View>
+       )
+     }
+
+
+
+
   }
 }
 
