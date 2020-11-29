@@ -21,9 +21,8 @@ export function configFunction() {
           imageUrl: item[apiKey],
         };
       });
+      console.log(arrayManipulate)
       return arrayManipulate
-
-
 };
 
 /*
@@ -31,16 +30,28 @@ export function configFunction() {
 "api1":{
   "path": "default",
   "key": "url",
-  "name":"api1"
+  "name":"api1",
+  "imageHeight":"height * 0.7",
+  "imageWidth":"width - 20",
+  "imageTop":"(height * 0.3) / 2",
+  "imageLeft":"10"
 },
 "api2":{
   "path": "default.images",
   "key":"link",
-  "name":"api2"
+  "name":"api2",
+  "imageHeight":"height * 0.7",
+  "imageWidth":"width - 20",
+  "imageTop":"(height * 0.3) / 2",
+  "imageLeft":"10"
 },
 "api3":{
   "path": "default.swipers[0].swiper.image_set",
   "key":"image_url",
-  "name":"api3"
+  "name":"api3",
+  "imageHeight":"height * 0.7",
+  "imageWidth":"width - 20",
+  "imageTop":"(height * 0.3) / 2",
+  "imageLeft":"10"
 }
 */

@@ -3,12 +3,11 @@ import { StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder } fro
 
 const { width, height } = Dimensions.get("window");
 
-
 export default class Card extends Component {
 
   componentWillMount() {
-    this.pan = new Animated.ValueXY()
 
+    this.pan = new Animated.ValueXY()
     this.cardPanResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onPanResponderMove: Animated.event([
@@ -19,18 +18,20 @@ export default class Card extends Component {
         const absDx = Math.abs(dx)
         const direction = absDx / dx
 
-        if (dx > 120) {
+        if (absDx > 120) {
           Animated.decay(this.pan, {
             velocity: {x:3 * direction, y:0},
             deceleration: 0.995,
-          }).start(this.props.onSwipeRight)
-        } else if(dx < -120) {
+          }).start(this.props.onSwipe)
+        }
+    /*  optional feature; if showing previousCard
+        else if(dx < -120) {
           Animated.decay(this.pan, {
             velocity: {x:3 * direction, y:0},
             deceleration: 0.995,
           }).start(this.props.onSwipeLeft)
         }
-        else {
+  */      else {
           Animated.spring(this.pan, {
             toValue: {x:0, y:0},
             friction: 4.5,
@@ -56,32 +57,30 @@ render() {
     ],
   }
 
+// customizing image position and size by imageInfo prop from integration-config.json
+// imageUrl is shown in the Text component below because of ui and data verification..
   return (
     <Animated.View
       {...this.cardPanResponder.panHandlers}
-      style={[styles.card, animatedStyle]}>
+      style={[{
+        position: 'absolute',
+        width: eval(this.props.imageInfo.imageWidth),
+        height: eval(this.props.imageInfo.imageHeight),
+        top: eval(this.props.imageInfo.imageTop),
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        left: eval(this.props.imageInfo.imageLeft),
+        borderWidth: 1,
+        borderColor: 'lightgrey',
+        borderRadius: 8,
+      }, animatedStyle]}>
       <Image
         style={{flex:1}}
         source={{uri: this.props.card}}
       />
-      <Text>{this.props.index}{this.props.index2}</Text>
+      <Text>{this.props.card}</Text>
 
     </Animated.View>
   )
 }
 }
-
-const styles = StyleSheet.create({
-card: {
-  position: 'absolute',
-  width: width - 20,
-  height: height * 0.7,
-  top: (height * 0.3) / 2,
-  overflow: 'hidden',
-  backgroundColor: 'white',
-  margin: 10,
-  borderWidth: 1,
-  borderColor: 'lightgrey',
-  borderRadius: 8,
-},
-})

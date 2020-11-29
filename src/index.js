@@ -4,20 +4,16 @@ import {View, Text, StyleSheet} from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
-import Counter from './components/counter';
-import Swiper from './components/swiper';
-import IncreaseCounter from './components/increaseCounter';
-import DecreaseCounter from './components/decreaseCounter';
+import Swiper from './components/swiper'; //swiper component
 
 export default class Main extends Component {
   render() {
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
       <Provider store={store}>
-      <View style={styles.container}>
-    
-        <Swiper />
-      </View>
+        <View style={styles.container}>
+          <Swiper />
+        </View>
       </Provider>
     );
   }

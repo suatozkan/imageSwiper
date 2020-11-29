@@ -6,74 +6,68 @@ import Card from './card';
 import {increaseCounter} from '../actions/counterAction';
 import {decreaseCounter} from '../actions/counterAction';
 import {setCounter} from '../actions/counterAction';
-
 import  _  from 'lodash';
 import {configFunction} from '../../configFunction.js'
+import * as config from '../../integration-config.json';
 
-const list = configFunction()
+const listOfImages = configFunction() // get list of images url with asked format.
 const { width, height } = Dimensions.get("window");
 
 
 class Swiper extends Component {
 
     nextCard = () => {
-      if(this.props.counter===list.length-1){
+      if(this.props.counter===listOfImages.length-1){
         this.props.dispatch(setCounter())
       }else{
         this.props.dispatch(increaseCounter())
-        console.log(this.props.counter)
       }
     }
-    previousCard = () => {
+/*   optional for previosCard action
+     previousCard = () => {
       if(this.props.counter==0){
         this.props.dispatch(setCounter())
       }else{
         this.props.dispatch(decreaseCounter())
-        console.log(this.props.counter)
       }
     }
-
+*/
 
   render() {
 
     const {counter} =this.props
-    console.log(list.length)
-    if(typeof list !== 'string') {
+
+     if(typeof listOfImages !== 'string') {
         return (
-         <View style={{width:width,height:height}}>
-           {list.slice(counter, counter + 5).map((card,index) => {
-             console.log(list.length)
-             return (
-               <Card
-                 key={card.imageUrl}
-                 card={card.imageUrl}
-                 index={counter}
-                 index2={index}
-                 onSwipeRight={this.nextCard.bind()}
-                 onSwipeLeft={this.previousCard.bind()}
-               />
-             )
-           })}
-         </View>
+           <View style={{width:width,height:height}}>
+               {listOfImages.map((card,index) => {
+                 if (index < counter) {
+                   return null;
+                 } else if (index == counter) {
+                   return (
+                     <Card
+                       key={card.imageUrl}
+                       card={card.imageUrl}
+                       indexCounter={counter}
+                       onSwipe={this.nextCard.bind()}
+                       imageInfo={config.default}
+                     />
+                   )
+                 }
+               })}
+           </View>
        )
      }else{
        return (
          <View style={{width:width,height:height,alignItems:'center',justifyContent:'center'}}>
-           <Text>{list}</Text>
+           <Text>{listOfImages}</Text>
          </View>
        )
      }
 
-
-
-
   }
 }
-
-
-
-
-
+// redux state actions
 function mapStateToProps(state,dispatch) {
   return {counter: state.counterReducer,
           action: bindActionCreators(increaseCounter, dispatch),

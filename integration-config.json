@@ -1,5 +1,9 @@
 config={
   "path": "images",
   "key":"link",
-  "name":"api2"
+  "name":"api2",
+  "imageHeight":"height * 0.7",
+  "imageWidth":"width - 20",
+  "imageTop":"(height * 0.3) / 2",
+  "imageLeft":"10"
 }
