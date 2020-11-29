@@ -10,12 +10,6 @@ import {setCounter} from '../actions/counterAction';
 import  _  from 'lodash';
 import {configFunction} from '../../configFunction.js'
 
-import * as api1 from '../../api1-response.json';
-import * as api2 from '../../api2-response.json';
-import * as api3 from '../../api3-response.json';
-import * as config from '../../integration-config.json';
-
-
 const list = configFunction()
 const { width, height } = Dimensions.get("window");
 
@@ -43,12 +37,11 @@ class Swiper extends Component {
   render() {
 
     const {counter} =this.props
-
-    if(list.length>0) {
-
+    console.log(list.length)
+    if(typeof list !== 'string') {
         return (
          <View style={{width:width,height:height}}>
-           {list.slice(counter, counter + 10).map((card,index) => {
+           {list.slice(counter, counter + 5).map((card,index) => {
              console.log(list.length)
              return (
                <Card
@@ -65,10 +58,8 @@ class Swiper extends Component {
        )
      }else{
        return (
-         <View style={{width:width,height:height}}>
-         <View>
+         <View style={{width:width,height:height,alignItems:'center',justifyContent:'center'}}>
            <Text>{list}</Text>
-         </View>
          </View>
        )
      }

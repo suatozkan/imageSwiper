@@ -1,6 +1,5 @@
 config={
-  "path": "swipers[0].swiper.image_set",
-  "key":"image_url",
-  "name":"api3",
-  "api":"./api3-response.json"
+  "path": "images",
+  "key":"link",
+  "name":"api2"
 }

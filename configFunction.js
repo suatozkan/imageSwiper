@@ -1,25 +1,33 @@
-import * as api1 from './api1-response.json';
-import * as api2 from './api2-response.json';
-import * as api3 from './api3-response.json';
+import * as api from './api-response.json';
 import * as config from './integration-config.json';
 import  _  from 'lodash';
 
+// converter function for integration-config.json
+// exporter only url will imageUrl key
 export function configFunction() {
-  let adres = config.default.api
-  let api = require(`./api3-response.json`)
-  console.log(api,'te',adres)
-    let apiArray= _.get(api, config.default.path);
+  let apiName = config.default.name
+      // an error control; if the api.name is wrong in integration-config.json, it shows error..
+      if(!api[apiName]){
+        return 'Error, api.name not found'
+      }
+      if(config.default.path==""){
+        var apiArray=api[apiName]
+      }else{
+        var apiArray= _.get(api[apiName], config.default.path);
+      }
+      let arrayManipulate = apiArray.map(item => {
+        let apiKey=config.default.key
+        return {
+          imageUrl: item[apiKey],
+        };
+      });
+      return arrayManipulate
 
-     let arrayManipulate = apiArray.map(item => {
-     let apiKey=config.default.key
-       return {
-         imageUrl: item[apiKey],
-       };
-     });
-     return arrayManipulate
+
 };
 
 /*
+-- example integration format in integration-config.json
 "api1":{
   "path": "default",
   "key": "url",
