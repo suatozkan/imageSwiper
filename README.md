@@ -2,7 +2,7 @@
 
 ![Alt text](https://i.ibb.co/gZLKTDG/Simulator-Screen-Shot-i-Phone-11-2020-11-29-at-13-18-45.png)
 
-Getting recent transactions via api and confirmation of them with React Native(react-native: 0.59.9).
+Getting images via api(depend on customer) and swipe endless with React Native(react-native: 0.63.2), Expo(expo:39.0.2).
 
 ## Getting Started
 
