@@ -11,7 +11,7 @@ Getting recent transactions via api and confirmation of them with React Native(r
 * 'Expo start'  
 * Set Api config in integration-config.json file as below;
 -choose value from options for which api
-```json
+```javascript
 config={
   "path": "default", ||  "default.images" || "default.swipers[0].swiper.image_set"
   "key": "url",   || "link"  ||  "image_url"
@@ -21,7 +21,7 @@ config={
   "imageTop":"(height * 0.3) / 2",
   "imageLeft":"10"
 }
-
+```
 
 ## Built With
 
