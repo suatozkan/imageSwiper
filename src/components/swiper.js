@@ -7,17 +7,32 @@ import {increaseCounter} from '../actions/counterAction';
 import {decreaseCounter} from '../actions/counterAction';
 import {setCounter} from '../actions/counterAction';
 import  _  from 'lodash';
-import {configFunction} from '../../configFunction.js'
+import configFunction from '../../configFunction.js'
 import * as config from '../../integration-config.json';
 
-const listOfImages = configFunction() // get list of images url with asked format.
+//const listOfImages = configFunction() // get list of images url with asked format.
 const { width, height } = Dimensions.get("window");
 
 
 class Swiper extends Component {
 
+    constructor(props) {
+     super(props);
+     this.state = {listOfImages:[]};
+   }
+
+  componentWillMount(){
+    this.getImages()
+  }
+
+   getImages = async() => {
+     let images= await configFunction()
+     this.setState({listOfImages:images})
+   }
+
+
     nextCard = () => {
-      if(this.props.counter===listOfImages.length-1){
+      if(this.props.counter===this.state.listOfImages.length-1){
         this.props.dispatch(setCounter())
       }else{
         this.props.dispatch(increaseCounter())
@@ -37,10 +52,10 @@ class Swiper extends Component {
 
     const {counter} =this.props
 
-     if(typeof listOfImages !== 'string') {
+     if(typeof this.state.listOfImages !== 'string') {
         return (
            <View style={{width:width,height:height}}>
-               {listOfImages.map((card,index) => {
+               {this.state.listOfImages.map((card,index) => {
                  if (index < counter) {
                    return null;
                  } else if (index == counter) {
@@ -60,7 +75,7 @@ class Swiper extends Component {
      }else{
        return (
          <View style={{width:width,height:height,alignItems:'center',justifyContent:'center'}}>
-           <Text>{listOfImages}</Text>
+           <Text>{this.state.listOfImages}</Text>
          </View>
        )
      }

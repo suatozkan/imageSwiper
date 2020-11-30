@@ -1,13 +1,9 @@
-import {configFunction} from './configFunction.js'
+import configFunction from './configFunction.js';
 
-test('test1', async() => {
-  const userId = await configFunction()
-  expect(3+2).toBe(testArray2);
+test('unitTest',async() => {
+  let testFunction= await configFunction()
+  expect(testFunction).toEqual(testArray3);
 });
-test('test2', () => {
-  expect(2+2).toBe(4);
-});
-
 
 const testArray1 = [
   { "imageUrl": "https://via.placeholder.com/800x600/BD463C" },

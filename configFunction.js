@@ -1,34 +1,44 @@
-import * as api from './api-response.json';
-import * as config from './integration-config.json';
+//import api  from './api-response.json'
+import config from './integration-config.json'
 import  _  from 'lodash';
-
+import fetch from 'isomorphic-fetch';
 // converter function for integration-config.json
-// exporter only url will imageUrl key
-export function configFunction() {
-  let apiName = config.default.name
+// exporter only url with imageUrl key
+const  configFunction = async()=>{
+
+      let apiName = config.name
+      const apiResponse = await fetch(`http://localhost:3000/${apiName}`);  //UPDATE localhost port for your device
+
+      if (!apiResponse.ok) {
+        const message = `An error has occured: ${response.status}`;
+        return message        // error control
+      }
+      const apiResults = await apiResponse.json();
       // an error control; if the api.name is wrong in integration-config.json, it shows error..
-      if(!api[apiName]){
+      if(!apiResults){
         return 'Error, api.name not found'
       }
-      if(config.default.path==""){
-        var apiArray=api[apiName]
+      if(config.path==""){
+        var apiArray=apiResults
       }else{
-        var apiArray= _.get(api[apiName], config.default.path);
+        var apiArray= _.get(apiResults, config.path);
       }
-      let arrayManipulate = apiArray.map(item => {
-        let apiKey=config.default.key
+      let arrayManipulated = apiArray.map(item => {
+        let apiKey=config.key
         return {
           imageUrl: item[apiKey],
         };
       });
-      console.log(arrayManipulate)
-      return arrayManipulate
+      console.log(arrayManipulated)
+      return arrayManipulated
 };
+
+export default configFunction
 
 /*
 -- example integration format in integration-config.json
 "api1":{
-  "path": "default",
+  "path": "",
   "key": "url",
   "name":"api1",
   "imageHeight":"height * 0.7",
@@ -37,7 +47,7 @@ export function configFunction() {
   "imageLeft":"10"
 },
 "api2":{
-  "path": "default.images",
+  "path": "images",
   "key":"link",
   "name":"api2",
   "imageHeight":"height * 0.7",
@@ -46,7 +56,7 @@ export function configFunction() {
   "imageLeft":"10"
 },
 "api3":{
-  "path": "default.swipers[0].swiper.image_set",
+  "path": "swipers[0].swiper.image_set",
   "key":"image_url",
   "name":"api3",
   "imageHeight":"height * 0.7",

@@ -1,7 +1,7 @@
-config={
-  "path": "images",
-  "key":"link",
-  "name":"api2",
+{
+  "path": "swipers[0].swiper.image_set",
+  "key":"image_url",
+  "name":"api3",
   "imageHeight":"height * 0.7",
   "imageWidth":"width - 20",
   "imageTop":"(height * 0.3) / 2",
