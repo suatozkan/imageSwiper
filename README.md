@@ -1,6 +1,6 @@
 # imageSwiper
 
-![Alt text](https://i.ibb.co/gZLKTDG/Simulator-Screen-Shot-i-Phone-11-2020-11-29-at-13-18-45.png)
+![Alt text](https://i.ibb.co/6YkNkPt/Ekran-Resmi-2020-12-01-01-33-56.png)
 
 Getting images via api(depend on customer) and swipe endless with React Native(react-native: 0.63.2), Expo(expo:39.0.2).
 
@@ -8,9 +8,10 @@ Getting images via api(depend on customer) and swipe endless with React Native(r
 
 * Download/Clone Repo.
 * 'npm install' in project folder
+* "npm install -g json-server" for install json api
+* "json-server --watch api-response.json"  for running api => control and update localhost port at configFunction.js file
 * 'Expo start'  
 * Set Api config in integration-config.json file as below;
-npm install -g json-server json-server --watch api-response.json
 -choose value from options for which api
 ```javascript
 config={
@@ -23,6 +24,8 @@ config={
   "imageLeft":"10"
 }
 ```
+* Ready
+* Yarn Test for testing
 
 ## Built With
 
