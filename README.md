@@ -10,6 +10,7 @@ Getting images via api(depend on customer) and swipe endless with React Native(r
 * 'npm install' in project folder
 * 'Expo start'  
 * Set Api config in integration-config.json file as below;
+npm install -g json-server json-server --watch api-response.json
 -choose value from options for which api
 ```javascript
 config={
