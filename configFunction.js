@@ -29,7 +29,6 @@ const  configFunction = async()=>{
           imageUrl: item[apiKey],
         };
       });
-      console.log(arrayManipulated)
       return arrayManipulated
 };
 
