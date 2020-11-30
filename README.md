@@ -7,10 +7,10 @@ Getting images via api(depend on customer) and swipe endless with React Native(r
 ## Getting Started
 
 * Download/Clone Repo.
-* 'npm install' in project folder
+* "npm install" in project folder
 * "npm install -g json-server" for install json api
 * "json-server --watch api-response.json"  for running api => control and update localhost port at configFunction.js file
-* 'Expo start'  
+* "expo start"  
 * Set Api config in integration-config.json file as below;
 -choose value from options for which api
 ```javascript
@@ -25,7 +25,7 @@ config={
 }
 ```
 * Ready
-* Yarn Test for testing
+* "yarn test" for testing
 
 ## Built With
 
